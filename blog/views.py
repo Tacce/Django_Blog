@@ -1,23 +1,8 @@
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Blog, Post, Comment
 from .forms import BlogForm, PostForm, CommentForm
-
-
-class SignUpView(View):
-    def get(self, request):
-        form = UserCreationForm()
-        return render(request, 'registration/signup.html', {'form': form})
-
-    def post(self, request):
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('login')
-        return render(request, 'registration/signup.html', {'form': form})
 
 
 class BlogListView(ListView):
