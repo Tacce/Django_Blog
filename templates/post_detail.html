@@ -8,7 +8,7 @@
   <h2>Comments</h2>
   <ul>
     {% for comment in object.comments.all %}
-      <li>{{ comment.author }}: {{ comment.content }}</li>
+      <li><a href="{% url 'profile' comment.author%}">{{ comment.author }}</a>: {{ comment.content }}</li>
     {% endfor %}
   </ul>
   <a href="{% url 'add_comment' object.pk %}">Add a comment</a>

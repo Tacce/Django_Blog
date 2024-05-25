@@ -6,13 +6,13 @@ from django import forms
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ('email', 'username', 'password1', 'password2')
+        fields = ('username', 'password1', 'password2', 'email')
 
 
 class CustomUserChangeForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = CustomUser
-        fields = ('username', 'email')  # profile_image
+        fields = ('username', 'email', 'bio')  # profile_image
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -5,7 +5,20 @@
 {% block content %}
 <h2>{{ user_profile.username }}'s Profile</h2>
 <!-- <img src="{{ user_profile.profile_image.url }}" alt="Profile Image" style="max-width: 200px;"> -->
+<p>Bio: {{ user_profile.bio }}</p>
 <p>Email: {{ user_profile.email }}</p>
+<h3> Blogs:</h3>
+{% if blogs %}
+    <ul>
+        {% for blog in blogs %}
+            <li>
+                <a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a>
+                <p>{{ blog.description }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
 {% if user == user_profile %}
     <a href="{% url 'edit_profile' %}">Edit Profile</a>
 {% endif %}

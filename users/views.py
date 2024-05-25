@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 
+from blog.models import Blog
 from .forms import CustomUserCreationForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -54,7 +55,12 @@ class CustomLogoutView(View):
 
 def profile_view(request, username):
     user = get_object_or_404(CustomUser, username=username)
-    return render(request, 'users/profile.html', {'user_profile': user})
+    blogs = Blog.objects.filter(author=user)
+    context = {
+        'user_profile': user,
+        'blogs': blogs,
+    }
+    return render(request, 'users/profile.html', context)
 
 
 @login_required

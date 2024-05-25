@@ -12,7 +12,7 @@
             <ul>
                 <li><a href="{% url 'blog_list' %}">Home</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'profile' username=user.username%}">Profile</a></li>
+                    <li><a href="{% url 'profile' user.username%}">Profile</a></li>
                     <li><a href="{% url 'blog_create' %}">Create Blog</a></li>
                     <li>
                         <form action="{% url 'logout' %}" method="post">
