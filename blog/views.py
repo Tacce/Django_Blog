@@ -1,7 +1,9 @@
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Blog, Post, Comment
+from .models import Blog, Post
 from .forms import BlogForm, PostForm, CommentForm
 
 
@@ -18,6 +20,17 @@ class BlogDetailView(DetailView):
 class PostDetailView(DetailView):
     model = Post
     template_name = 'post_detail.html'
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+
+        likes_connected = get_object_or_404(Post, id=self.kwargs['pk'])
+        liked = False
+        if likes_connected.likes.filter(id=self.request.user.id).exists():
+            liked = True
+        data['number_of_likes'] = likes_connected.total_likes()
+        data['post_is_liked'] = liked
+        return data
 
 
 @login_required
@@ -64,3 +77,15 @@ def add_comment(request, post_id):
     else:
         form = CommentForm()
     return render(request, 'comment_form.html', {'form': form, 'post': post})
+
+
+@login_required
+def like_post(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get('blogpost_id'))
+    if post.likes.filter(id=request.user.id).exists():
+        post.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
+
+    return HttpResponseRedirect(reverse('post_detail', args=[str(pk)]))
+

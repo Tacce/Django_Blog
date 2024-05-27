@@ -21,10 +21,13 @@ class Post(models.Model):
     content = models.TextField()
     published_date = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    like_number = models.IntegerField(default=0)
+    likes = models.ManyToManyField(CustomUser, related_name='liked_posts', blank=True)
 
     def __str__(self):
         return self.title
+
+    def total_likes(self):
+        return self.likes.count()
 
 
 class Comment(models.Model):
@@ -36,3 +39,11 @@ class Comment(models.Model):
     def __str__(self):
         return f'Comment by {self.author} on {self.post}'
 
+
+'''class Like  (models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    username = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.username
+'''
