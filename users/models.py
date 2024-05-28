@@ -1,9 +1,29 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from PIL import Image
 
 
 class CustomUser(AbstractUser):
-    # profile_image = models.ImageField(upload_to='profile_images/', blank=True, null=True)
+    profile_image = models.ImageField(upload_to='profile_images/', default='default.png')
     email = models.CharField(max_length=200, blank=True)
     bio = models.TextField(blank=True)
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.profile_image:
+            img = Image.open(self.profile_image.path)
+
+            width, height = img.size
+            if width > height:
+                left = (width - height) / 2
+                upper = 0
+                right = (width + height) / 2
+                lower = height
+            else:
+                left = 0
+                upper = (height - width) / 2
+                right = width
+                lower = (height + width) / 2
+
+            img = img.crop((left, upper, right, lower))
+            img.save(self.profile_image.path)

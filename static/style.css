@@ -1,0 +1,14 @@
+ul{
+    list-style: none;
+    padding: 0;
+}
+
+.user-wrapper{
+    display: flex;
+    align-items: center;
+}
+
+.profile-image{
+    width: 30px;
+    height: auto;
+}

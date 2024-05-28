@@ -24,7 +24,12 @@
   <h2>Comments</h2>
   <ul>
     {% for comment in object.comments.all %}
-      <li><a href="{% url 'profile' comment.author%}">{{ comment.author }}</a>: {{ comment.content }}</li>
+      <li>
+          <div class="user-wrapper">
+            <img src="{{ comment.author.profile_image.url }}" alt="{{ comment.author.username }}" class="profile-image">
+            <a href="{% url 'profile' comment.author%}">{{ comment.author }}</a>: {{ comment.content }}
+          </div>
+      </li>
     {% endfor %}
   </ul>
   <a href="{% url 'add_comment' object.pk %}">Add a comment</a>
