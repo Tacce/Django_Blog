@@ -10,6 +10,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)
+    followers = models.ManyToManyField(CustomUser, related_name='followed_blogs', blank=True)
 
     def __str__(self):
         return self.title

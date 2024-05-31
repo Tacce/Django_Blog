@@ -10,6 +10,19 @@ from .forms import BlogForm, PostForm, CommentForm
 class BlogListView(ListView):
     model = Blog
     template_name = 'blog_list.html'
+    context_object_name = 'all_blogs'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            followed_blogs = Blog.objects.filter(followers=self.request.user)
+        else:
+            followed_blogs = []
+        context['followed_blogs'] = followed_blogs
+        return context
+
+    def get_queryset(self):
+        return Blog.objects.all()
 
 
 class BlogDetailView(DetailView):
@@ -86,6 +99,14 @@ def like_post(request, pk):
         post.likes.remove(request.user)
     else:
         post.likes.add(request.user)
-
     return HttpResponseRedirect(reverse('post_detail', args=[str(pk)]))
 
+
+@login_required
+def follow_blog(request, pk):
+    blog = get_object_or_404(Blog, pk=pk)
+    if blog.followers.filter(id=request.user.id).exists():
+        blog.followers.remove(request.user)
+    else:
+        blog.followers.add(request.user)
+    return HttpResponseRedirect(reverse('blog_detail', args=[str(pk)]))

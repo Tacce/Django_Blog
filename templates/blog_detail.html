@@ -8,9 +8,26 @@
 </div>
   <p>{{ object.description }}</p>
   <p>Created at: {{ object.created_at }}</p>
-    {% if blog.author == user %}
-  <a href="{% url 'post_create' object.pk %}">Add a new post</a>
+    <p>Followers: {{ blog.followers.count }}</p>
+
+{% if blog.author != user %}
+    {% if user.is_authenticated%}
+        <form action="{% url 'follow_blog' blog.pk %}" method="post">
+            {% csrf_token %}
+            {% if user in blog.followers.all %}
+                <button type="submit" class="unfollow-button">Unfollow</button>
+            {% else %}
+                <button type="submit" class="follow-button">Follow</button>
+            {% endif %}
+        </form>
+    {% else %}
+        <p>You must be <a href="{% url 'login' %}">logged in</a> to follow this blog.</p>
     {% endif %}
+
+{% else %}
+  <a href="{% url 'post_create' object.pk %}">Add a new post</a>
+{% endif %}
+
   <h2>Posts</h2>
   <ul>
     {% for post in object.posts.all %}

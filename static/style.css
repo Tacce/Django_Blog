@@ -12,3 +12,20 @@ ul{
     width: 30px;
     height: auto;
 }
+
+.follow-button, .unfollow-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.follow-button {
+    background-color: green;
+    color: white;
+}
+
+.unfollow-button {
+    background-color: red;
+    color: white;
+}
