@@ -1,4 +1,4 @@
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
@@ -110,3 +110,21 @@ def follow_blog(request, pk):
     else:
         blog.followers.add(request.user)
     return HttpResponseRedirect(reverse('blog_detail', args=[str(pk)]))
+
+
+@login_required
+def delete_blog(request, pk):
+    blog = get_object_or_404(Blog, pk=pk)
+    if blog.author != request.user:
+        return HttpResponseForbidden()
+    blog.delete()
+    return redirect('blog_list')
+
+
+@login_required
+def delete_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if post.author != request.user:
+        return HttpResponseForbidden()
+    post.delete()
+    return redirect('blog_detail', pk=post.blog.pk)
