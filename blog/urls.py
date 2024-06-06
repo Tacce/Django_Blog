@@ -12,5 +12,6 @@ urlpatterns = [
     path('follow/<int:pk>', views.follow_blog, name='follow_blog'),
     path('blog/<int:pk>/delete/', views.delete_blog, name='delete_blog'),
     path('post/<int:pk>/delete/', views.delete_post, name='delete_post'),
+    path('post/<int:post_pk>/comment/<int:comment_pk>/delete/', views.delete_comment, name='delete_comment'),
 ]
 

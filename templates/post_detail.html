@@ -32,6 +32,12 @@
           <div class="user-wrapper">
             <img src="{{ comment.author.profile_image.url }}" alt="{{ comment.author.username }}" class="profile-image">
             <a href="{% url 'profile' comment.author%}">{{ comment.author }}</a>: {{ comment.content }}
+            {% if user.is_authenticated %}
+            {% if user == comment.author or user == post.author %}
+                <a class="delete-comment" href="{% url 'delete_comment' post.pk comment.pk %}"
+                   onclick="return confirm('Are you sure you want to delete this comment?');">Delete Comment</a>
+            {% endif %}
+            {% endif %}
           </div>
       </li>
     {% endfor %}

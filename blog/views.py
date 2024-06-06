@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Blog, Post
+from .models import Blog, Post, Comment
 from .forms import BlogForm, PostForm, CommentForm
 
 
@@ -128,3 +128,13 @@ def delete_post(request, pk):
         return HttpResponseForbidden()
     post.delete()
     return redirect('blog_detail', pk=post.blog.pk)
+
+
+@login_required
+def delete_comment(request, post_pk, comment_pk):
+    post = get_object_or_404(Post, pk=post_pk)
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    if comment.author != request.user and post.author != request.user:
+        return HttpResponseForbidden()
+    comment.delete()
+    return redirect('post_detail', pk=post_pk)

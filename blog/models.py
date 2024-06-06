@@ -40,11 +40,3 @@ class Comment(models.Model):
     def __str__(self):
         return f'Comment by {self.author} on {self.post}'
 
-
-'''class Like  (models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    username = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.username
-'''
