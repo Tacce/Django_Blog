@@ -1,6 +1,19 @@
+body{
+    font-family: Source Sans Pro, Helvetica, sans-serif;
+}
+
 ul{
     list-style: none;
     padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.blog_action_wrapper{
+    display: flex;
+    flex-direction: column;
 }
 
 .user-wrapper{
@@ -13,27 +26,31 @@ ul{
     height: auto;
 }
 
-.follow-button, .unfollow-button {
+.green-button, .red-button {
+    width: auto;
+    display: inline-block;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.follow-button {
+.green-button {
     background-color: green;
     color: white;
 }
 
-.unfollow-button {
+.red-button {
     background-color: red;
     color: white;
 }
 
 .delete-comment{
-    visibility: hidden;
+    padding-left: 1em;
+    display: none;
+    color: red;
 }
 
-.delete-comment:hover{
-    visibility: visible;
+.user-wrapper:hover .delete-comment{
+    display: block;
 }
