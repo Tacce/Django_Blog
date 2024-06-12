@@ -11,6 +11,24 @@ a {
     text-decoration: none;
 }
 
+button {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    padding: 0;
+    outline: none;
+}
+
+button:hover, a:hover{
+    text-decoration: underline;
+}
+
+.logout{
+    color: red;
+}
+
 .blog_action_wrapper{
     display: flex;
     flex-direction: column;
@@ -53,4 +71,23 @@ a {
 
 .user-wrapper:hover .delete-comment{
     display: block;
+}
+
+.blog_info_wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 1em;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-danger {
+    background-color: red;
+    color: white;
 }

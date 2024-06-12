@@ -65,11 +65,20 @@ def profile_view(request, username):
 
 @login_required
 def edit_profile(request):
+    user = request.user
     if request.method == 'POST':
-        form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
+        form = CustomUserChangeForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
-            return redirect('profile', username=request.user.username)
+            return redirect('profile', username=user.username)
     else:
-        form = CustomUserChangeForm(instance=request.user)
+        form = CustomUserChangeForm(instance=user)
     return render(request, 'users/edit_profile.html', {'form': form})
+
+
+@login_required
+def remove_profile_image(request, username):
+    user = get_object_or_404(CustomUser, username=username)
+    user.remove_profile_image()
+    return redirect('profile', username=user.username)
+

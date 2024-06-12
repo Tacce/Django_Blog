@@ -9,4 +9,12 @@
     {{ form.as_p }}
     <button type="submit">Save changes</button>
 </form>
+
+{% if user.profile_image and user.profile_image != 'default.png' %}
+    <form method="post" action="{% url 'remove_profile_image' user.username %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Remove Profile Image</button>
+    </form>
+{% endif %}
+
 {% endblock %}

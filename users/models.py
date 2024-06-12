@@ -27,3 +27,9 @@ class CustomUser(AbstractUser):
 
             img = img.crop((left, upper, right, lower))
             img.save(self.profile_image.path)
+
+    def remove_profile_image(self):
+        if self.profile_image and self.profile_image.url != 'default.png':
+            self.profile_image.delete(save=False)
+        self.profile_image = 'default.png'
+        self.save()

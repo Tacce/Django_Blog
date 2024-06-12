@@ -12,14 +12,22 @@
     <ul>
         {% for blog in blogs %}
             <li>
+                <div class="blog_info_wrapper">
                 <a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a>
-                <p>{{ blog.description }}</p>
+                <div>Description: {{ blog.description }}</div>
+                </div>
             </li>
         {% endfor %}
     </ul>
+{% else%}
+    {% if user == user_profile %}
+        <div><a href="{% url 'blog_create' %}">Create Blog</a></div>
+    {% else %}
+        This user hasn't created any blog yet.
+    {% endif %}
 {% endif %}
 
 {% if user == user_profile %}
-    <a href="{% url 'edit_profile' %}">Edit Profile</a>
+    <div><a href="{% url 'edit_profile' %}">Edit Profile</a></div>
 {% endif %}
 {% endblock %}

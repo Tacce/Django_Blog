@@ -10,9 +10,18 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class CustomUserChangeForm(UserChangeForm):
+
     class Meta(UserChangeForm.Meta):
         model = CustomUser
         fields = ('username', 'email', 'bio', 'profile_image')
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        # if self.cleaned_data['remove_profile_image']:
+        #    user.remove_profile_image()
+        if commit:
+            user.save()
+        return user
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
