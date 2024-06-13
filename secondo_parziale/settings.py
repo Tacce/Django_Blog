@@ -28,7 +28,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'djangoblog-production-80ba.up.railway.app',
+    '127.0.0.1'
 ]
+
+CSRF_TRUSTED_ORIGINS = ['https://djangoblog-production-80ba.up.railway.app']
+
+CORS_ORIGIN_WHITELIST = ['https://djangoblog-production-80ba.up.railway.app']
 
 # Application definition
 
