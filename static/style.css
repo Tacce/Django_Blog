@@ -32,6 +32,12 @@ button:hover, a:hover{
 .blog_action_wrapper{
     display: flex;
     flex-direction: column;
+    gap: .5em;
+}
+
+.blog_action_wrapper a,
+.blog_action_wrapper button {
+    width: fit-content;
 }
 
 .user-wrapper{
@@ -80,14 +86,7 @@ button:hover, a:hover{
     padding-bottom: 1em;
 }
 
-.btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.btn-danger {
-    background-color: red;
-    color: white;
+.like_button img{
+    width: 50px;
+    height: auto;
 }

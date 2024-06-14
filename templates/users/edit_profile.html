@@ -13,7 +13,7 @@
 {% if user.profile_image and user.profile_image != 'default.png' %}
     <form method="post" action="{% url 'remove_profile_image' user.username %}">
       {% csrf_token %}
-      <button type="submit" class="btn btn-danger">Remove Profile Image</button>
+      <button type="submit" class="red-button">Remove Profile Image</button>
     </form>
 {% endif %}
 

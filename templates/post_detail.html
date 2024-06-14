@@ -1,6 +1,11 @@
 {% extends "base_generic.html" %}
+{% load static %}
 
 {% block content %}
+  <p>
+    Back to Blog:
+    <a href="{% url 'blog_detail' object.blog.pk %}">{{ object.blog.title }}</a>
+  </p>
   <h1>{{ object.title }}</h1>
   <p>{{ object.content }}</p>
   <p>Created at: {{ object.created_at }}</p>
@@ -16,9 +21,13 @@
     {% csrf_token %}
 
     {% if post_is_liked %}
-    <button type="submit" name="blogpost_id" value="{{object.id}}" class="btn btn-info">Unlike</button>
+    <button type="submit" name="blogpost_id" value="{{object.id}}" class="like_button">
+    <img src={% static 'images/full_heart.png'%}>
+    </button>
     {% else %}
-    <button type="submit" name="blogpost_id" value="{{object.id}}" class="btn btn-info">Like</button>
+    <button type="submit" name="blogpost_id" value="{{object.id}}" class="like_button">
+    <img src={% static 'images/empty_heart.png'%}>
+    </button>
     {% endif %}
   </form>
 {% else %}

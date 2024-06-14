@@ -27,18 +27,20 @@
 
 {% else %}
     <div class="blog_action_wrapper">
-    <a href="{% url 'post_create' object.pk %}">Add a new post</a>
+    <a href="{% url 'post_create' object.pk %}" class="green-button">+ Add New Post</a>
     <form action="{% url 'delete_blog' blog.pk %}" method="post" style="display: inline;">
         {% csrf_token %}
         <button type="submit" class="red-button" onclick="return confirm('Are you sure you want to delete this blog?');">Delete Blog</button>
     </form>
-</div>
+    </div>
 {% endif %}
 
   <h2>Posts</h2>
   <ul>
     {% for post in object.posts.all %}
       <li><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></li>
+    {% empty %}
+        <p>This blog doesn't have any posts yet.</p>
     {% endfor %}
   </ul>
 {% endblock %}
