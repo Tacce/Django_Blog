@@ -12,19 +12,24 @@
         <h1>MyBlogMaker</h1>
         <nav>
             <ul>
-                <li><a href="{% url 'blog_list' %}">Home</a></li>
+                <li><a href="{% url 'blog_list' %}" class="blue-button"><div class="icon_button_wrapper">
+                <img src={% static 'images/home_icon.png'%}>Home</div></a></li>
+
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'profile' user.username%}">Profile</a></li>
-                    <li><a href="{% url 'blog_create' %}">Create Blog</a></li>
+                    <li><a href="{% url 'profile' user.username %}" class="blue-button"><div class="icon_button_wrapper">
+                    <img src={% static 'images/user_icon.png'%}>Profile</div></a></li>
                     <li>
                         <form action="{% url 'logout' %}" method="post">
                         {% csrf_token %}
-                        <button class="logout" type="submit">Logout</button>
+                        <button class="red-button" type="submit"><div class="icon_button_wrapper">
+                    <img src={% static 'images/logout_icon.png'%}>Logout</div></button>
                         </form>
                     </li>
                 {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                    <li><a href="{% url 'login' %}" class="green-button"><div class="icon_button_wrapper">
+                    <img src={% static 'images/login_icon.png'%}>Login</div></a></li>
+                    <li><a href="{% url 'signup' %}" class="green-button"><div class="icon_button_wrapper">
+                    <img src={% static 'images/signup_icon.png'%}>Sign Up</div></a></li>
                 {% endif %}
             </ul>
         </nav>

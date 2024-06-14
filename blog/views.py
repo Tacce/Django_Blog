@@ -16,9 +16,12 @@ class BlogListView(ListView):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             followed_blogs = Blog.objects.filter(followers=self.request.user)
+            user_blogs = Blog.objects.filter(author=self.request.user)
         else:
             followed_blogs = []
+            user_blogs = []
         context['followed_blogs'] = followed_blogs
+        context['user_blogs'] = user_blogs
         return context
 
     def get_queryset(self):
@@ -43,6 +46,7 @@ class PostDetailView(DetailView):
             liked = True
         data['number_of_likes'] = likes_connected.total_likes()
         data['post_is_liked'] = liked
+        data['form'] = CommentForm()
         return data
 
 
@@ -89,7 +93,7 @@ def add_comment(request, post_id):
             return redirect('post_detail', pk=post.pk)
     else:
         form = CommentForm()
-    return render(request, 'comment_form.html', {'form': form, 'post': post})
+    return render(request, 'post_detail.html', {'form': form, 'post': post})
 
 
 @login_required

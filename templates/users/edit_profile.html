@@ -7,7 +7,7 @@
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Save changes</button>
+    <button type="submit" class="green-button">Save changes</button>
 </form>
 
 {% if user.profile_image and user.profile_image != 'default.png' %}

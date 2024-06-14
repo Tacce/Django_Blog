@@ -1,4 +1,5 @@
 {% extends "base_generic.html" %}
+{% load static %}
 
 {% block title %}{{ user_profile.username }}'s Profile{% endblock %}
 
@@ -19,15 +20,18 @@
             </li>
         {% endfor %}
     </ul>
-{% else%}
+    {% endif %}
+
     {% if user == user_profile %}
-        <div><a href="{% url 'blog_create' %}">Create Blog</a></div>
+        <a href="{% url 'blog_create' %}" class="green-button"><div class="icon_button_wrapper">
+        <img src={% static 'images/write_icon.png'%}>Create Blog</div></a>
     {% else %}
         This user hasn't created any blog yet.
     {% endif %}
-{% endif %}
+
 
 {% if user == user_profile %}
-    <div><a href="{% url 'edit_profile' %}">Edit Profile</a></div>
+    <a href="{% url 'edit_profile' %}" class="grey-button"><div class="icon_button_wrapper">
+        <img src={% static 'images/settings_icon.png'%}>Edit Profile</div></a>
 {% endif %}
 {% endblock %}

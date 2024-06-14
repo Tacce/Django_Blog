@@ -1,13 +1,24 @@
 {% extends "base_generic.html" %}
+{% load static %}
 
 {% block content %}
 {% if user.is_authenticated %}
+    <a href="{% url 'blog_create' %}" class="green-button"><div class="icon_button_wrapper">
+        <img src={% static 'images/write_icon.png'%}>Create Blog</div></a>
     <h1>Followed Blogs</h1>
   <ul>
     {% for blog in followed_blogs %}
       <li><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></li>
       {% empty %}
         <li>You are not following any blogs yet.</li>
+    {% endfor %}
+  </ul>
+    <h1>Your Blogs</h1>
+  <ul>
+    {% for blog in user_blogs %}
+      <li><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></li>
+      {% empty %}
+        <li>You have not created any blog yet.</li>
     {% endfor %}
   </ul>
 {% endif %}
@@ -18,5 +29,4 @@
       <li><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></li>
     {% endfor %}
   </ul>
-  <a href="{% url 'blog_create' %}">Create a new blog</a>
 {% endblock %}

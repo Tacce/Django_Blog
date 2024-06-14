@@ -2,9 +2,18 @@ body{
     font-family: Source Sans Pro, Helvetica, sans-serif;
 }
 
+form textarea{
+    font-family: Source Sans Pro, Helvetica, sans-serif;
+    resize: none;
+}
+
 ul{
     list-style: none;
     padding: 0;
+}
+
+ul li{
+    padding-bottom: .5em;
 }
 
 a {
@@ -50,23 +59,30 @@ button:hover, a:hover{
     height: auto;
 }
 
-.green-button, .red-button {
+.green-button, .red-button, .blue-button, .grey-button {
     width: auto;
     display: inline-block;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    color: white;
 }
 
 .green-button {
     background-color: green;
-    color: white;
 }
 
 .red-button {
     background-color: red;
-    color: white;
+}
+
+.blue-button{
+    background-color: royalblue;
+}
+
+.grey-button{
+    background-color: grey;
 }
 
 .delete-comment{
@@ -87,6 +103,32 @@ button:hover, a:hover{
 }
 
 .like_button img{
-    width: 50px;
+    width: 40px;
     height: auto;
+}
+
+/* COMMENT FORM */
+.comment-form {
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.comment-form textarea {
+    box-sizing: border-box;
+    width: 60%;
+    height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.icon_button_wrapper{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.icon_button_wrapper img{
+    height: auto;
+    width: 20px;
 }
