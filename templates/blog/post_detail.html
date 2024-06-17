@@ -8,8 +8,7 @@
     </div>
     <h1>{{ object.title }}</h1>
   <p>{{ object.content }}</p>
-  <p>Created at: {{ object.created_at }}</p>
-  <p>Last updated: {{ object.updated_at }}</p>
+  <p>{{ object.published_date }}</p>
 
 {% if user.is_authenticated and user == post.author %}
     <form action="{% url 'delete_post' post.pk %}" method="post" style="display: inline;">
