@@ -5,6 +5,7 @@
 
 {% block content %}
 <h2>{{ user_profile.username }}'s Profile</h2>
+<div class="user-profile-wrapper">
 <img src="{{ user_profile.profile_image.url }}" alt="Profile Image" style="max-width: 200px;">
 <p>Bio: {{ user_profile.bio }}</p>
 <p>Email: {{ user_profile.email }}</p>
@@ -14,24 +15,26 @@
         {% for blog in blogs %}
             <li>
                 <div class="blog_info_wrapper">
-                <a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a>
+                <a href="{% url 'blog_detail' blog.pk %}"><h4>{{ blog.title }}</h4></a>
                 <div>Description: {{ blog.description }}</div>
                 </div>
             </li>
         {% endfor %}
     </ul>
-    {% endif %}
-
-    {% if user == user_profile %}
-        <a href="{% url 'blog_create' %}" class="green-button"><div class="icon_button_wrapper">
-        <img src={% static 'images/write_icon.png'%}>Create Blog</div></a>
     {% else %}
+    {% if user != user_profile %}
         This user hasn't created any blog yet.
+        {% else %}
+        You have not created any blog yet.
     {% endif %}
-
-
+{% endif %}
 {% if user == user_profile %}
+    <div class="user-action-wrapper">
+    <a href="{% url 'blog_create' %}" class="green-button"><div class="icon_button_wrapper">
+        <img src={% static 'images/write_icon.png'%}>Create Blog</div></a>
     <a href="{% url 'edit_profile' %}" class="grey-button"><div class="icon_button_wrapper">
         <img src={% static 'images/settings_icon.png'%}>Edit Profile</div></a>
+    </div>
 {% endif %}
+</div>
 {% endblock %}

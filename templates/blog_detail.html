@@ -38,7 +38,11 @@
   <h2>Posts</h2>
   <ul>
     {% for post in object.posts.all %}
-      <li><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></li>
+      <li>
+          <div class="blog_info_wrapper"><a href="{% url 'post_detail' post.pk %}"><h4>{{ post.title }}</h4></a>
+          {{ post.content }}
+          </div>
+      </li>
     {% empty %}
         <p>This blog doesn't have any posts yet.</p>
     {% endfor %}

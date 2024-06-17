@@ -2,7 +2,7 @@
 
 {% block content %}
   <h1>Create Blog</h1>
-  <form method="post">
+  <form method="post" class="create-form">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="green-button">Save</button>

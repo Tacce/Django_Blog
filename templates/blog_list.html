@@ -2,11 +2,17 @@
 {% load static %}
 
 {% block content %}
+  <div class="list-wrapper">
 {% if user.is_authenticated %}
     <h1>Followed Blogs</h1>
-  <ul>
+    <ul>
     {% for blog in followed_blogs %}
-      <li><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></li>
+      <li>
+          <div class="blog_info_wrapper"><a href="{% url 'blog_detail' blog.pk %}"><h4>{{ blog.title }}</h4></a>
+            <div>{{ blog.description }}</div>
+            <div>by <a href="{% url 'profile' blog.author %}">{{ blog.author }}</a></div>
+          </div>
+      </li>
       {% empty %}
         <li>You are not following any blogs yet.</li>
     {% endfor %}
@@ -14,7 +20,11 @@
     <h1>Your Blogs</h1>
   <ul>
     {% for blog in user_blogs %}
-      <li><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></li>
+      <li>
+          <div class="blog_info_wrapper"><a href="{% url 'blog_detail' blog.pk %}"><h4>{{ blog.title }}</h4></a>
+            <div>{{ blog.description }}</div>
+          </div>
+      </li>
       {% empty %}
         <li>You have not created any blog yet.</li>
     {% endfor %}
@@ -26,7 +36,12 @@
   <h1>All Blogs</h1>
   <ul>
     {% for blog in all_blogs %}
-      <li><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></li>
+      <li><div class="blog_info_wrapper"><a href="{% url 'blog_detail' blog.pk %}"><h4>{{ blog.title }}</h4></a>
+            <div>{{ blog.description }}</div>
+            <div>by <a href="{% url 'profile' blog.author %}">{{ blog.author }}</a></div>
+          </div>
+      </li>
     {% endfor %}
   </ul>
+</div>
 {% endblock %}

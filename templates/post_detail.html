@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block content %}
-  <p>
-    Back to Blog:
-    <a href="{% url 'blog_detail' object.blog.pk %}">{{ object.blog.title }}</a>
-  </p>
-  <h1>{{ object.title }}</h1>
+    <div class="blog_link">
+    <p>Back to Blog:  &nbsp;  </p>
+    <a href="{% url 'blog_detail' object.blog.pk %}"><h4>{{ object.blog.title }}</h4></a>
+    </div>
+    <h1>{{ object.title }}</h1>
   <p>{{ object.content }}</p>
   <p>Created at: {{ object.created_at }}</p>
   <p>Last updated: {{ object.updated_at }}</p>
@@ -63,7 +63,7 @@
     <form id="comment-form" method="post" action="{% url 'add_comment' post.pk %}" class="comment-form">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit" class="green-button">Submit</button>
+      <button type="submit" class="green-button">Publish</button>
     </form>
   </div>
     {% else %}
