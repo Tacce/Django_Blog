@@ -9,7 +9,7 @@ from .forms import BlogForm, PostForm, CommentForm
 
 class BlogListView(ListView):
     model = Blog
-    template_name = 'blog_list.html'
+    template_name = 'blog/blog_list.html'
     context_object_name = 'all_blogs'
 
     def get_context_data(self, **kwargs):
@@ -30,12 +30,12 @@ class BlogListView(ListView):
 
 class BlogDetailView(DetailView):
     model = Blog
-    template_name = 'blog_detail.html'
+    template_name = 'blog/blog_detail.html'
 
 
 class PostDetailView(DetailView):
     model = Post
-    template_name = 'post_detail.html'
+    template_name = 'blog/post_detail.html'
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
@@ -61,7 +61,7 @@ def create_blog(request):
             return redirect('blog_detail', pk=blog.pk)
     else:
         form = BlogForm()
-    return render(request, 'blog_form.html', {'form': form})
+    return render(request, 'blog/blog_form.html', {'form': form})
 
 
 @login_required
@@ -77,7 +77,7 @@ def create_post(request, blog_id):
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm()
-    return render(request, 'post_form.html', {'form': form, 'blog': blog})
+    return render(request, 'blog/post_form.html', {'form': form, 'blog': blog})
 
 
 @login_required
@@ -93,7 +93,7 @@ def add_comment(request, post_id):
             return redirect('post_detail', pk=post.pk)
     else:
         form = CommentForm()
-    return render(request, 'post_detail.html', {'form': form, 'post': post})
+    return render(request, 'blog/post_detail.html', {'form': form, 'post': post})
 
 
 @login_required

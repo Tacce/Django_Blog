@@ -25,11 +25,11 @@
 
     {% if post_is_liked %}
     <button type="submit" name="blogpost_id" value="{{object.id}}" class="like_button">
-    <img src={% static 'images/full_heart.png'%}>
+    <img src={% static 'images/full_heart.png' %}>
     </button>
     {% else %}
     <button type="submit" name="blogpost_id" value="{{object.id}}" class="like_button">
-    <img src={% static 'images/empty_heart.png'%}>
+    <img src={% static 'images/empty_heart.png' %}>
     </button>
     {% endif %}
   </form>
@@ -57,7 +57,7 @@
 
 {% if user.is_authenticated %}
   <button id="show-comment-form" class="blue-button"><div class="icon_button_wrapper">
-      <img src={% static 'images/comment_icon.png'%}>Add a Comment</div></button>
+      <img src={% static 'images/comment_icon.png' %}>Add a Comment</div></button>
 
   <div id="comment-form-wrapper" style="display: none;">
     <form id="comment-form" method="post" action="{% url 'add_comment' post.pk %}" class="comment-form">
