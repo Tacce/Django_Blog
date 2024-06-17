@@ -8,30 +8,26 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}?v=1.0">
 </head>
 <body>
-    <header>
-        <h1>MyBlogMaker</h1>
-        <nav>
-            <ul>
-                <li><a href="{% url 'blog_list' %}" class="blue-button"><div class="icon_button_wrapper">
-                <img src={% static 'images/home_icon.png'%}>Home</div></a></li>
+    <header class="site-header">
+        <div class="site-title"><h1>MyBlogMaker</h1></div>
+        <nav class="nav-wrapper">
+            <a href="{% url 'blog_list' %}" class="blue-button"><div class="icon_button_wrapper">
+            <img src={% static 'images/home_icon.png'%}>Home</div></a>
 
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'profile' user.username %}" class="blue-button"><div class="icon_button_wrapper">
-                    <img src={% static 'images/user_icon.png'%}>Profile</div></a></li>
-                    <li>
-                        <form action="{% url 'logout' %}" method="post">
-                        {% csrf_token %}
-                        <button class="red-button" type="submit"><div class="icon_button_wrapper">
+            {% if user.is_authenticated %}
+                <a href="{% url 'profile' user.username %}" class="blue-button"><div class="icon_button_wrapper">
+                <img src={% static 'images/user_icon.png'%}>Profile</div></a>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button class="red-button" type="submit"><div class="icon_button_wrapper">
                     <img src={% static 'images/logout_icon.png'%}>Logout</div></button>
-                        </form>
-                    </li>
-                {% else %}
-                    <li><a href="{% url 'login' %}" class="green-button"><div class="icon_button_wrapper">
-                    <img src={% static 'images/login_icon.png'%}>Login</div></a></li>
-                    <li><a href="{% url 'signup' %}" class="green-button"><div class="icon_button_wrapper">
-                    <img src={% static 'images/signup_icon.png'%}>Sign Up</div></a></li>
-                {% endif %}
-            </ul>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="green-button"><div class="icon_button_wrapper">
+                <img src={% static 'images/login_icon.png'%}>Login</div></a>
+                <a href="{% url 'signup' %}" class="green-button"><div class="icon_button_wrapper">
+                <img src={% static 'images/signup_icon.png'%}>Sign Up</div></a>
+            {% endif %}
         </nav>
     </header>
     <main>

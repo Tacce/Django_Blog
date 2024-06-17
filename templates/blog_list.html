@@ -3,8 +3,6 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-    <a href="{% url 'blog_create' %}" class="green-button"><div class="icon_button_wrapper">
-        <img src={% static 'images/write_icon.png'%}>Create Blog</div></a>
     <h1>Followed Blogs</h1>
   <ul>
     {% for blog in followed_blogs %}
@@ -21,6 +19,8 @@
         <li>You have not created any blog yet.</li>
     {% endfor %}
   </ul>
+    <a href="{% url 'blog_create' %}" class="green-button"><div class="icon_button_wrapper">
+        <img src={% static 'images/write_icon.png'%}>Create Blog</div></a>
 {% endif %}
 
   <h1>All Blogs</h1>

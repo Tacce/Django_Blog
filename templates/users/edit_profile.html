@@ -4,6 +4,7 @@
 
 {% block content %}
 <h2>Edit Profile</h2>
+<div class="edit-wrapper">
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
@@ -15,6 +16,7 @@
       {% csrf_token %}
       <button type="submit" class="red-button">Remove Profile Image</button>
     </form>
+</div>
 {% endif %}
 
 {% endblock %}
