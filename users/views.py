@@ -28,31 +28,6 @@ class SignUpView(View):
         return render(request, 'registration/signup.html', {'form': form})
 
 
-'''
-class CustomLoginView(View):
-    def get(self, request):
-        form = AuthenticationForm()
-        return render(request, 'users/login.html', {'form': form})
-
-    def post(self, request):
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('blog_list')
-        return render(request, 'users/login.html', {'form': form})
-
-
-class CustomLogoutView(View):
-    def get(self, request):
-        logout(request)
-        return redirect('blog_list')
-'''
-
-
 def profile_view(request, username):
     user = get_object_or_404(CustomUser, username=username)
     blogs = Blog.objects.filter(author=user)
