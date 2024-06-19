@@ -57,6 +57,11 @@ button:hover, a:hover{
     margin-left: 1em;
 }
 
+a.title-link{
+    color: black;
+    text-decoration: none;
+}
+
 .nav-wrapper{
     align-items: center;
     float: right;

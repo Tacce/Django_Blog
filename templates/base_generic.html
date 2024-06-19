@@ -9,7 +9,7 @@
 </head>
 <body>
     <header class="site-header">
-        <div class="site-title"><h1>MyBlogMaker</h1></div>
+        <div class="site-title"><a href="{% url 'blog_list' %}" class="title-link"><h1>MyBlogMaker</h1></a></div>
         <nav class="nav-wrapper">
             <a href="{% url 'blog_list' %}" class="blue-button"><div class="icon_button_wrapper">
             <img src={% static 'images/home_icon.png'%}>Home</div></a>
